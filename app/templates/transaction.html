@@ -1,0 +1,27 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="transaction_window">
+        <div>
+            <a href="/index/" style="float: left; margin-top: 10px; margin-left: 5px;"><i
+                    class="feather-chevron-left transaction_close_button"></i></a>
+            <p>赞赏设置</p>
+            <a href="/index/" style="float: right; margin-top: 10px; margin-right: 5px;"><i
+                    class="feather-x-circle transaction_close_button"></i></a>
+        </div>
+        <div>
+            <p style="font-size: 18px; margin-left: 10px;">赞赏金额</p>
+            <p style="font-size: 10px; margin-right: 10px; margin-top: 20px ;color: #a9a9a9; float: right;">
+                点击修改金额</p>
+        </div>
+        <form method="post" novalidate>
+            {% csrf_token %}
+            {{ transactionform.transaction_amount }}
+            <span style="color: red; margin-left: 10px;">{{ transactionform.transaction_amount.errors.0 }}</span>
+            <div style="align-items: center; justify-content: center; display: flex;">
+                <button type="submit" class="transaction_open_button">赞赏</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}

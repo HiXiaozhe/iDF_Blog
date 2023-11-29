@@ -1,0 +1,103 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block body %}
+    <div class="py-4">
+        <div class="container">
+            <div class="row">
+                <!-- Main Content -->
+                <main class="col col-xl-9 order-xl-2 col-lg-12 order-lg-1 col-md-12 col-sm-12 col-12">
+                    <div class="box shadow-sm border rounded bg-white mb-3 osahan-share-post">
+                        <h5 class="pl-3 pt-3 pr-3 border-bottom mb-0 pb-3">关注与粉丝</h5>
+                        <ul class="nav border-bottom osahan-line-tab" id="myTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
+                                   aria-controls="home" aria-selected="true">我的关注</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
+                                   aria-controls="profile" aria-selected="false">我的粉丝</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                <div class="p-3">
+                                    <div class="row" id="dynamic people">
+                                        {% for follower in followers %}
+                                            <div class="col-md-4">
+                                                <div>
+                                                    <div class="border network-item rounded mb-3">
+                                                        <div class="p-3 d-flex align-items-center network-item-header">
+                                                            <div class="dropdown-list-image mr-3">
+                                                                <img class="rounded-circle" alt=""
+                                                                     src="data:image/jpg;base64,{{ follower.avatar }}">
+                                                            </div>
+                                                            <div class="font-weight-bold">
+                                                                <h6 class="font-weight-bold text-dark mb-0">{{ follower.name }}</h6>
+                                                            </div>
+                                                        </div>
+                                                        <div class="network-item-footer py-3 d-flex text-center">
+                                                            <div class="col-12 pl-3 pr-1">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                <div class="p-3 w-100">
+                                    <div class="row">
+                                        {% for follower in followings %}
+                                            <div class="col-md-4">
+                                                <div>
+                                                    <div class="border network-item rounded mb-3">
+                                                        <div class="p-3 d-flex align-items-center network-item-header">
+                                                            <div class="dropdown-list-image mr-3">
+                                                                <img class="rounded-circle" alt=""
+                                                                     src="data:image/jpg;base64,{{ follower.avatar }}">
+                                                            </div>
+                                                            <div class="font-weight-bold">
+                                                                <h6 class="font-weight-bold text-dark mb-0">{{ follower.name }}</h6>
+                                                            </div>
+                                                        </div>
+                                                        <div class="network-item-footer py-3 d-flex text-center">
+                                                            <div class="col-12 pl-3 pr-1">
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+                <aside class="col col-xl-3 order-xl-2 col-lg-12 order-lg-2 col-12">
+                    <div class="box mb-3 shadow-sm border rounded bg-white list-sidebar">
+                        <div class="box-title p-3">
+                            <h6 class="m-0">我的联系</h6>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <a href="#">
+                                <li class="list-group-item pl-3 pr-3 d-flex align-items-center text-dark"><i
+                                        class="feather-user-check mr-2 text-dark"></i> 我的关注 <span
+                                        class="ml-auto font-weight-bold">{{ follows_count }}</span></li>
+                            </a>
+                            <a href="#">
+                                <li class="list-group-item pl-3 pr-3 d-flex align-items-center text-dark"><i
+                                        class="feather-message-circle mr-2 text-dark"></i> 我的粉丝 <span
+                                        class="ml-auto font-weight-bold">{{ fans_count }}</span></li>
+                            </a>
+                        </ul>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </div>
+{% endblock %}

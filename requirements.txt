@@ -1,0 +1,4 @@
+Django==4.1
+pyrchain==0.3.12
+protobuf==3.19.0
+pillow==10.1.0

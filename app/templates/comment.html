@@ -1,0 +1,15 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="comment_window" id="comment_window" style="display: block">
+        <form method="post" novalidate>
+            {% csrf_token %}
+            {{ commentform.comment_content }}
+            <a href="/index/">
+                <button type="button" class="comment_close_button">取消</button>
+            </a>
+            <button type="submit" class="comment_add_button">发送</button>
+        </form>
+    </div>
+{% endblock %}

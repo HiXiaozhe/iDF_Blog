@@ -1,0 +1,120 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block body %}
+    <div class="py-4">
+        <div class="container">
+            <div class="row">
+                <!-- 左侧 -->
+                <aside class="col col-xl-3 order-xl-1 col-lg-12 order-lg-1 col-12">
+                    <!-- 头像、名字、标签、关注、粉丝、退出登录 -->
+                    <div class="box mb-3 shadow-sm border rounded bg-white profile-box text-center">
+                        <div class="py-4 px-3 border-bottom">
+                            <!-- 头像 -->
+                            <img class="img-fluid mt-2 rounded-circle" alt="Responsive image"
+                                 src="data:image/jpg;base64,{{ userinfo.avatar }}">
+                            <!-- 名字 -->
+                            <h5 class="font-weight-bold text-dark mb-1 mt-4">{{ userinfo.name }}</h5>
+                            <!-- 简介 -->
+                            <p class="mb-0 text-muted">{{ userinfo.label }}</p>
+                        </div>
+                        <div class="d-flex">
+                            <div class="col-6 border-right p-3">
+                                <!-- connection数字 -->
+                                <h6 class="font-weight-bold text-dark mb-1">{{ fans_count }}</h6>
+                                <p class="mb-0 text-black-50 small">粉丝</p>
+                            </div>
+                            <div class="col-6 p-3">
+                                <!-- views数字 -->
+                                <h6 class="font-weight-bold text-dark mb-1">{{ follows_count }}</h6>
+                                <p class="mb-0 text-black-50 small">关注</p>
+                            </div>
+                        </div>
+                        <div class="overflow-hidden border-top">
+                            <!-- 退出登录 -->
+                            <a class="font-weight-bold p-3 d-block" href="/logout/"> 退出登录 </a>
+                        </div>
+                    </div>
+                    <!-- 钱包 -->
+                    <div class="box shadow-sm border rounded bg-white mb-3">
+                        <div class="box-title border-bottom p-3">
+                            <h6 class="m-0">我的钱包</h6>
+                        </div>
+                        <div class="box-body">
+                            <!-- 钱包 -->
+                            <div class="d-flex align-items-center osahan-post-header p-3 border-bottom people-list">
+                                <div class="dropdown-list-image mr-3">
+                                    <img class="rounded-circle" alt="" src={% static "img/l8.png" %}>
+                                </div>
+                                <div class="font-weight-bold">
+                                    <div class="text-truncate">我的资产<span
+                                            class="badge badge-danger ml-1">{{ userinfo.money }}</span>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+                <!-- 中间 -->
+                <main class="col col-xl-6 order-xl-2 col-lg-12 order-lg-2 col-md-12 col-sm-12 col-12">
+                    <!-- 个人简介 -->
+                    <div class="box shadow-sm border rounded bg-white mb-3">
+                        <div class="box-title border-bottom p-3">
+                            <h6 class="m-0">我的简介</h6>
+                        </div>
+                        <div class="box-body p-3">
+                            <p>{{ userinfo.intro }}</p>
+                        </div>
+                    </div>
+                    <!-- 我的博客 -->
+                    <div class="box shadow-sm border rounded bg-white mb-3">
+                        <div class="box-title border-bottom p-3">
+                            <h6 class="m-0">我发布的</h6>
+                        </div>
+                        <!-- 三个框框 -->
+                        {% for bloginfo in bloginfo_list %}
+                            <div class="box-body p-3 border-bottom">
+                                <div class="d-flex align-items-top job-item-header pb-2">
+                                    <div class="mr-2">
+                                        <h6 class="font-weight-bold text-dark mb-0">{{ bloginfo.publisher }}</h6>
+                                        <div class="text-truncate text-primary">{{ bloginfo.location }}</div>
+                                        <div class="small text-gray-500">{{ bloginfo.timestamp }}</div>
+                                    </div>
+                                </div>
+                                <p class="mb-0">{{ bloginfo.content }}</p>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </main>
+                <!-- 右侧 -->
+                <aside class="col col-xl-3 order-xl-3 col-lg-12 order-lg-3 col-12">
+                    <!-- 粉丝 -->
+                    <div class="box shadow-sm border rounded bg-white mb-3">
+                        <div class="box-title border-bottom p-3">
+                            <h6 class="m-0">我的粉丝</h6>
+                        </div>
+                        <!-- 五个粉丝框 -->
+                        <div class="box-body p-3">
+                            {% for fans in fans_list %}
+                                <div class="d-flex align-items-center osahan-post-header mb-3 people-list">
+                                    <div class="dropdown-list-image mr-3">
+                                        <img class="rounded-circle" alt=""
+                                             src="data:image/jpg;base64,{{ fans.avatar }}">
+                                        <div class="status-indicator bg-success"></div>
+                                    </div>
+                                    <div class="font-weight-bold mr-2">
+                                        <div class="text-truncate">{{ fans.name }}</div>
+                                        <div class="small text-gray-500">{{ fans.label }}
+                                        </div>
+                                    </div>
+
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </div>
+{% endblock %}

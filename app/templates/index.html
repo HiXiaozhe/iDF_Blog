@@ -1,0 +1,149 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block body %}
+    <div class="py-4">
+        <div class="container">
+            <div class="row">
+                <!-- Main Content -->
+                <main class="col col-xl-6 order-xl-2 col-lg-12 order-lg-1 col-md-12 col-sm-12 col-12" id="mainContent">
+                    {% block content %}
+
+                    {% endblock %}
+                    {#                发布博客#}
+                    <form method="post" novalidate>
+                        {% csrf_token %}
+                        <div class="box shadow-sm border rounded bg-white mb-3 osahan-share-post">
+                            <ul class="nav nav-justified border-bottom osahan-line-tab" id="myTab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#" role="tab"
+                                       aria-controls="contact" aria-selected="false"><i class="feather-clipboard"></i>
+                                        写一篇博客</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content" id="myTabContent">
+                                <div class="tab-pane fade show active" id="home" role="tabpanel"
+                                     aria-labelledby="home-tab">
+                                    <div class="p-3 d-flex align-items-center w-100" href="#">
+                                        <div class="dropdown-list-image mr-3">
+                                            <img class="rounded-circle" alt="" id="mypic3"
+                                                 src="data:image/jpg;base64,{{ userinfo.avatar }}">
+                                            <div class="status-indicator bg-success"></div>
+                                        </div>
+                                        <div class="w-100">
+                                            {{ blogform.blog_content }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="border-top p-3 d-flex align-items-center">
+                                <div class="mr-auto"><a href="#" class="text-link small">
+                                </a></div>
+                                <div class="flex-shrink-1">
+                                    <button type="submit" class="btn btn-primary btn-sm">发布！
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    {#                博客列表#}
+                    {% for blog in bloginfo_list %}
+                        <div class="box shadow-sm border rounded bg-white mb-3 osahan-post">
+                            <div class="p-3 d-flex align-items-center border-bottom osahan-post-header">
+                                <div class="dropdown-list-image mr-3">
+                                    <img class="rounded-circle" alt="" src="data:image/jpg;base64,{{ blog.avatar }}">
+                                    <div class="status-indicator bg-success"></div>
+                                </div>
+                                <div class="font-weight-bold">
+                                    <div class="text-truncate">{{ blog.publisher }}</div>
+                                    <div style="color: grey;font-weight: 200">该用户已被累计打赏￥{{ blog.likes }}</div>
+
+                                </div>
+                                <span class="ml-auto small">{{ blog.timestamp }}</span>
+                            </div>
+                            <div class="p-3 border-bottom osahan-post-body">
+                                <p class="mb-0" style="color: black; font-size: 15px; font-family: " Bitstream Vera Sans
+                                   Mono", Monaco, "Courier New", Courier, monospace;">{{ blog.content }} <a
+                                    href="#"></a></p>
+                            </div>
+                            <div class="p-3 border-bottom osahan-post-footer">
+                                <a href="/index/transaction/?sender={{ userinfo.name }}&receiver={{ blog.publisher }}"
+                                   style="color: #6c757d; margin-right: 10px;" class="feather-dollar-sign"></a>
+                                <a href="/index/comment/?blog_publisher={{ blog.publisher }}&blog_timestamp={{ blog.timestamp }}"
+                                   class="mr-3 text-secondary commentButton">
+                                    <i class="feather-message-square"></i>
+                                </a>
+                            </div>
+                            {% for commentinfo in blog.commentinfo_list %}
+                                <div class="p-3 d-flex align-items-top border-bottom osahan-post-comment">
+                                    <div class="dropdown-list-image mr-3">
+                                        <img class="rounded-circle" alt=""
+                                             src="data:image/jpg;base64,{{ commentinfo.avatar }}">
+                                        <div class="status-indicator bg-success"></div>
+                                    </div>
+                                    <div class="font-weight-bold">
+                                        <div class="text-truncate">{{ commentinfo.username }}</div>
+                                        <div class="small text-gray-500">{{ commentinfo.content }}</div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endfor %}
+                </main>
+                {#            左边#}
+                <aside class="col col-xl-3 order-xl-1 col-lg-6 order-lg-2 col-md-6 col-sm-6 col-12">
+                    <div class="box mb-3 shadow-sm border rounded bg-white profile-box text-center">
+                        <div class="py-4 px-3 border-bottom">
+                            <img class="img-fluid mt-2 rounded-circle" alt="Responsive image" id="mypic1"
+                                 src="data:image/jpg;base64,{{ userinfo.avatar }}">
+                            <h5 class="font-weight-bold text-dark mb-1 mt-4">{{ userinfo.name }}</h5>
+                        </div>
+                        <div class="d-flex">
+                            <div class="col-6 border-right p-3">
+                                <h6 class="font-weight-bold text-dark mb-1">{{ fans_count }}</h6>
+                                <p class="mb-0 text-black-50 small">粉丝</p>
+                            </div>
+                            <div class="col-6 p-3">
+                                <h6 class="font-weight-bold text-dark mb-1">{{ follows_count }}</h6>
+                                <p class="mb-0 text-black-50 small">关注</p>
+                            </div>
+                        </div>
+                        <div class="overflow-hidden border-top">
+                            <a class="font-weight-bold p-3 d-block" href="/profile"> 我的主页 </a>
+                        </div>
+                    </div>
+                </aside>
+                {#            右边#}
+                <aside class="col col-xl-3 order-xl-3 col-lg-6 order-lg-3 col-md-6 col-sm-6 col-12">
+                    <div class="box shadow-sm border rounded bg-white mb-3">
+                        <div class="box-title border-bottom p-3">
+                            <h6 class="m-0">值得关注的人</h6>
+                        </div>
+                        <div class="box-body p-3">
+                            {% for user in userinfo_list %}
+                                <div class="d-flex align-items-center osahan-post-header mb-3 people-list">
+                                    <div class="dropdown-list-image mr-3">
+                                        <img class="rounded-circle" alt=""
+                                             src="data:image/jpg;base64,{{ user.avatar }}">
+                                        <div class="status-indicator bg-success"></div>
+                                    </div>
+                                    <div class="font-weight-bold mr-2">
+                                        <div class="text-truncate">{{ user.name }}</div>
+                                        <div class="small text-gray-500">{{ user.label }}</div>
+                                    </div>
+                                    <span class="ml-auto">
+                                    <a href="/index/follow/?username1={{ userinfo.name }}&username2={{ user.name }}">
+                                        <button type="button" class="btn btn-light btn-sm" id="storeDataButton1">
+                                            <i id="iconElement1" class="feather-user-plus"></i>
+                                        </button>
+                                    </a>
+                                </span>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,128 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" type="image/png" href={% static "img/fav.png" %}>
+    <title></title>
+    <!-- Slick Slider -->
+    <link rel="stylesheet" type="text/css" href={% static "plugins/slick/slick.min.css" %}/>
+    <link rel="stylesheet" type="text/css" href={% static "plugins/slick/slick-theme.min.css" %}/>
+    <!-- Feather Icon-->
+    <link rel="stylesheet" type="text/css" href={% static "plugins/icons/feather.css" %}>
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href={% static "plugins/bootstrap/css/bootstrap.min.css" %}>
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href={% static "css/style.css" %}>
+    {% block css %}
+
+    {% endblock %}
+</head>
+
+<body>
+<!-- Navigation -->
+<nav class="navbar navbar-expand navbar-dark bg-dark osahan-nav-top p-0">
+    <div class="container">
+        <a class="navbar-brand mr-2" href="/index"><img alt="" src={% static "img/logo.png" %}>
+        </a>
+        <form class="d-none d-sm-inline-block form-inline mr-auto my-2 my-md-0 mw-100 navbar-search">
+            <div class="input-group">
+                <input type="text" class="form-control shadow-none border-0" placeholder="搜索..."
+                       aria-label="Search" aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                    <button class="btn" type="button">
+                        <i class="feather-search"></i>
+                    </button>
+                </div>
+            </div>
+        </form>
+        <ul class="navbar-nav ml-auto d-flex align-items-center">
+            <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+            <li class="nav-item dropdown no-arrow d-sm-none">
+                <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    <i class="feather-search mr-2"></i>
+                </a>
+                <!-- Dropdown - Messages -->
+                <div class="dropdown-menu dropdown-menu-right p-3 shadow-sm animated--grow-in"
+                     aria-labelledby="searchDropdown">
+                    <form class="form-inline mr-auto w-100 navbar-search">
+                        <div class="input-group">
+                            <input type="text" class="form-control border-0 shadow-none"
+                                   placeholder="Search people, jobs and more..." aria-label="Search"
+                                   aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                                <button class="btn" type="button">
+                                    <i class="feather-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/connection"><i class="feather-users mr-2"></i><span
+                        class="d-none d-lg-inline">关注与粉丝</span></a>
+            </li>
+            <li class="nav-item dropdown mr-2">
+                <a class="nav-link dropdown-toggle pr-0" href="#" role="button" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    <i class="feather-file-text mr-2"></i><span class="d-none d-lg-inline">查看</span>
+                </a>
+                <!-- Dropdown - User Information -->
+                <div class="dropdown-menu dropdown-menu-right shadow-sm">
+                    <a class="dropdown-item" href="/profile"><i class="feather-user mr-1"></i> 主页</a>
+                    <a class="dropdown-item" href="/connection"><i class="feather-users mr-1"></i> 关注与粉丝</a>
+                </div>
+            </li>
+            <!-- Nav Item - User Information -->
+            <li class="nav-item dropdown no-arrow ml-1 osahan-profile-dropdown">
+                <a class="nav-link dropdown-toggle pr-0" href="#" role="button" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    <img class="img-profile rounded-circle" id="mypic2"
+                         src="data:image/jpg;base64,{{ userinfo.avatar }}">
+                </a>
+                <!-- Dropdown - User Information -->
+                <div class="dropdown-menu dropdown-menu-right shadow-sm">
+                    <div class="p-3 d-flex align-items-center">
+                        <div class="dropdown-list-image mr-3">
+                            <img class="rounded-circle" alt="" id="mypic4"
+                                 src="data:image/jpg;base64,{{ userinfo.avatar }}">
+                            <div class="status-indicator bg-success"></div>
+                        </div>
+                        <div class="font-weight-bold">
+                            <div class="text-truncate">{{ userinfo.name }}</div>
+                            <!-- 简介 -->
+                            <div class="small text-gray-500">{{ userinfo.label }}</div>
+                        </div>
+                    </div>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="/profile"><i class="feather-user mr-1"></i> 主页</a>
+                    <a class="dropdown-item" href="/logout/"><i class="feather-log-out mr-1"></i> 登出</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>
+{% block body %}
+
+{% endblock %}
+
+<!-- Bootstrap core JavaScript -->
+<script src={% static "plugins/jquery/jquery.min.js" %}></script>
+<script src={% static "plugins/bootstrap/js/bootstrap.bundle.min.js" %}></script>
+<!-- slick Slider JS-->
+<script type="text/javascript" src={% static "plugins/slick/slick.min.js" %}></script>
+<!-- Custom scripts for all pages-->
+<script src={% static "js/osahan.js" %}></script>
+{% block js %}
+
+{% endblock %}
+
+</body>
+</html>

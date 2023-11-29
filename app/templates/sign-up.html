@@ -1,0 +1,76 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" type="image/png" href={% static "img/fav.png" %}>
+    <title></title>
+    <!-- Slick Slider -->
+    <link rel="stylesheet" type="text/css" href={% static "plugins/slick/slick.min.css" %}/>
+    <link rel="stylesheet" type="text/css" href={% static "plugins/slick/slick-theme.min.css" %}/>
+    <!-- Feather Icon-->
+    <link rel="stylesheet" type="text/css" href={% static "plugins/icons/feather.css" %}>
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href={% static "plugins/bootstrap/css/bootstrap.min.css" %}>
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href={% static "css/style.css" %}>
+</head>
+<body>
+<div class="bg-white">
+    <div class="container">
+        <div class="row justify-content-center align-items-center d-flex vh-100">
+            <div class="col-md-4 mx-auto">
+                <div class="osahan-login py-4">
+                    <div class="text-center mb-4">
+                        <a href="/index/"><img alt="" src={% static "img/fav.png" %}></a>
+                        <h5 class="font-weight-bold mt-3">加入DF</h5>
+                        <p class="text-muted">开启你的私人社交网络</p>
+                    </div>
+                    <form method="POST" novalidate>
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label class="mb-1">用户名</label>
+                            <div class="position-relative icon-form-control">
+                                {{ form.username }}
+                                <span style="color: red">{{ form.username.errors.0 }}</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="mb-1">密码</label>
+                            <div class="position-relative icon-form-control">
+                                {{ form.password }}
+                                <span style="color: red">{{ form.password.errors.0 }}</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="mb-1">确认密码</label>
+                            <div class="position-relative icon-form-control">
+                                {{ form.password_confirm }}
+                                <span style="color: red">{{ form.password_confirm.errors.0 }}</span>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary btn-block text-uppercase" type="submit">创建用户</button>
+                        <div class="py-3 d-flex align-item-center">
+                            <a href="">忘记密码?</a>
+                            <span class="ml-auto"> 已经拥有一个账户? <a class="font-weight-bold"
+                                                                        href="/sign-in/">登录</a></span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Bootstrap core JavaScript -->
+<script src={% static "plugins/jquery/jquery.min.js" %}></script>
+<script src={% static "plugins/bootstrap/js/bootstrap.bundle.min.js" %}></script>
+<!-- slick Slider JS-->
+<script type="text/javascript" src={% static "plugins/slick/slick.min.js" %}></script>
+<!-- Custom scripts for all pages-->
+<script src={% static "js/osahan.js" %}></script>
+</body>
+</html>
